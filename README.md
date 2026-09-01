@@ -47,6 +47,14 @@ Two things the provenance controls rule in and out:
 - **The DOM showing `'v1'` after removal is NOT part of the regression.** Removal has never
   notified observers — rc.0 shows the same `'v1'`.
 
+A third file, [src/gateObservability.test.tsx](src/gateObservability.test.tsx), retains the
+downstream-consequence measurement: a reactive gate that exposes data only while a live cache
+entry exists (the shape a login/identity boundary uses to react to removal, since removal does not
+notify observers). Four cases — the gate as a `createMemo` and as a plain tracked effect, each
+with the post-removal refetch completing and hanging. At rc.0 every case closes the gate promptly
+(the exposed-value timeline ends with `undefined`); at rc.1 the gate never emits a closed state,
+even during the window where `getQueryData` is `undefined`.
+
 ## Versions
 
 `@tanstack/query-core` is pinned at 5.101.4 in every cell (rc.1's own exact dependency, via a
