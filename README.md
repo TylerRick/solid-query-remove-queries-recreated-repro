@@ -1,6 +1,7 @@
 # solid-query 6.0.0-rc.1: `removeQueries()` on an actively observed query is immediately re-created and refetched
 
-Reproduction for a bug report against `@tanstack/solid-query` 6.0.0-rc.1.
+Reproduction for [TanStack/query#11350](https://github.com/TanStack/query/issues/11350), against
+`@tanstack/solid-query` 6.0.0-rc.1.
 
 Calling `queryClient.removeQueries()` while a `useQuery` observer is mounted removes the entry and
 then immediately brings it back: the cache emits `removed` followed by `added`, the observer is
