@@ -3,5 +3,5 @@ import solid from 'vite-plugin-solid';
 export default defineConfig({
 	plugins: [solid()],
 	resolve: { conditions: ['development', 'browser'] },
-	test: { environment: 'jsdom', globals: true },
+	test: { environment: 'jsdom', globals: true, setupFiles: ['./src/jest-dom-setup.ts'] },
 });
